@@ -1,71 +1,58 @@
 package com.ChenDll.classroommanagement.user;
 
+import com.ChenDll.classroommanagement.constants.Role;  // 引用独立的 Role 枚举
+
 import java.time.LocalDateTime;
 
 public class User {
     private int id;               // 用户ID
     private String username;      // 用户名
     private String password;      // 密码
-    private String role;          // 用户角色（ADMIN/STUDENT）
-    private int failedAttempts; // 登录失败次数
+    private Role role;            // 用户角色（ADMIN/STUDENT）
+    private String studentId;     // 学号
+    private String department;    // 院系
+    private String idCard;        // 身份证号
+    private int failedAttempts;   // 登录失败次数
     private LocalDateTime lockUntil; // 锁定到期时间
 
-    public User(int id, String username, String password, String role) {
+    // 构造方法
+    public User(int id, String username, String password, Role role, String studentId, String department, String idCard) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
-    }
-
-    public int getFailedAttempts() {
-        return failedAttempts;
-    }
-
-    public void setFailedAttempts(int failedAttempts) {
-        this.failedAttempts = failedAttempts;
-    }
-
-    public LocalDateTime getLockUntil() {
-        return lockUntil;
-    }
-
-    public void setLockUntil(LocalDateTime lockUntil) {
-        this.lockUntil = lockUntil;
+        this.studentId = studentId;
+        this.department = department;
+        this.idCard = idCard;
     }
 
     // Getter 和 Setter
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
 
-    public String getUsername() {
-        return username;
-    }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    public Role getRole() { return role; }
+    public void setRole(Role role) { this.role = role; }
 
-    public String getPassword() {
-        return password;
-    }
+    public String getStudentId() { return studentId; }
+    public void setStudentId(String studentId) { this.studentId = studentId; }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public String getDepartment() { return department; }
+    public void setDepartment(String department) { this.department = department; }
 
-    public String getRole() {
-        return role;
-    }
+    public String getIdCard() { return idCard; }
+    public void setIdCard(String idCard) { this.idCard = idCard; }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+    public int getFailedAttempts() { return failedAttempts; }
+    public void setFailedAttempts(int failedAttempts) { this.failedAttempts = failedAttempts; }
 
+    public LocalDateTime getLockUntil() { return lockUntil; }
+    public void setLockUntil(LocalDateTime lockUntil) { this.lockUntil = lockUntil; }
 
     public boolean isLocked() {
         return lockUntil != null && lockUntil.isAfter(LocalDateTime.now());
@@ -80,7 +67,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", role='" + role + '\'' +
+                ", role=" + role +
                 '}';
     }
 }

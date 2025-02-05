@@ -1,0 +1,35 @@
+<configuration>
+
+    <!-- 设置 HikariCP 日志级别为 WARN -->
+    <logger name="com.zaxxer.hikari" level="DEBUG"/>
+
+    <!-- 控制台输出 -->
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %-5level - %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 将日志输出到文件 -->
+    <appender name="File" class="ch.qos.logback.core.FileAppender">
+        <file>logs/application.log</file> <!-- 日志文件路径 -->
+<!--        &lt;!&ndash; 设置日志文件的滚动策略 &ndash;&gt;-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
+<!--            &lt;!&ndash; 当日志文件大小超过 10MB 时，进行轮转 &ndash;&gt;-->
+<!--            <maxFileSize>10MB</maxFileSize>-->
+<!--        </rollingPolicy>-->
+
+<!--        &lt;!&ndash; 设置日志文件的最大历史文件数 &ndash;&gt;-->
+<!--        <maxHistory>10</maxHistory>  &lt;!&ndash; 保留最近 10 个日志文件 &ndash;&gt;-->1
+        <!-- 设置日志文件的格式 -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %-5level - %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 设置根日志级别 -->
+    <root level="INFO">
+        <appender-ref ref="File"/>
+    </root>
+
+</configuration>

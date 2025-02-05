@@ -15,55 +15,31 @@ public class Classroom {
         this.isAvailable = isAvailable;
     }
 
+    public Classroom() {}
+
     // Getter 和 Setter
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public String getName() {
-        return name;
-    }
+    public int getCapacity() { return capacity; }
+    public void setCapacity(int capacity) { this.capacity = capacity; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public boolean isHasMultimedia() { return hasMultimedia; }
+    public void setHasMultimedia(boolean hasMultimedia) { this.hasMultimedia = hasMultimedia; }
 
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
-    public boolean isHasMultimedia() {
-        return hasMultimedia;
-    }
-
-    public void setHasMultimedia(boolean hasMultimedia) {
-        this.hasMultimedia = hasMultimedia;
-    }
-
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
+    public boolean isAvailable() { return isAvailable; }
+    public void setAvailable(boolean available) { isAvailable = available; }
 
     @Override
     public String toString() {
-        return "Classroom{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", capacity=" + capacity +
-                ", hasMultimedia=" + hasMultimedia +
-                ", isAvailable=" + isAvailable +
-                '}';
+        return String.format("课室ID：%d\n课室名称：%s\n容量：%d人\n是否有多媒体设备：%s\n课室状态：%s\n",
+                id,
+                name,
+                capacity,
+                hasMultimedia ? "有" : "无",
+                isAvailable ? "可用" : "不可用");
     }
 }

@@ -1,25 +1,43 @@
 package com.ChenDll.classroommanagement.user;
 
-public class UserService {
-    private final UserDao userDao = new UserDao();
+import com.ChenDll.classroommanagement.constants.Role;
 
-    // 注册用户
-    public boolean register(String username, String password, String role) {
-        // 自动生成用户ID（模拟数据库自增ID）
-        int newId = userDao.getAllUsers().size() + 1;
-        User newUser = new User(newId, username, password, role);
-        return userDao.addUser(newUser);
+public class UserService {
+    private static final UserDao userDao = new UserDao();
+
+    // UserService.java
+    public static boolean registerUser(String username, String password, Role role, String studentId, String department, String idCard) {
+        // 检查用户名是否已存在
+        if (UserDao.checkUsernameExists(username)) {
+            return false; // 如果用户名存在，返回 false
+        }
+        // 如果用户名不存在，继续执行注册
+        return UserDao.addUser(username, password, role, studentId, department, idCard) != -1;
     }
 
     // 用户登录
-    public User login(String username, String password) {
-        return userDao.findByUsernameAndPassword(username, password);
+    public static boolean login(String username, String password) {
+        return userDao.loginUser(username, password);
     }
 
-    // 获取所有用户（调试用）
-    public void printAllUsers() {
-        for (User user : userDao.getAllUsers()) {
-            System.out.println(user);
-        }
+    // 获取用户信息
+//    public User getUserInfo(String username) {
+//        return userDao.getUserByUsername(username);
+//    }
+
+    // 获取用户角色
+    public User getUserRole(String username) {
+        return userDao.getUserByUsername(username);
     }
+
+    // 获取所有用户
+//    public List<User> getAllUsers() {
+//        return userDao.getAllUsers();
+//    }
+//
+//    // 删除用户
+//    public boolean removeUser(int id) {
+//        return userDao.deleteUser(id);
+//    }
 }
+
