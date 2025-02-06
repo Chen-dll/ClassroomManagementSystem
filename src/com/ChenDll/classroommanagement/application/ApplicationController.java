@@ -88,6 +88,7 @@ public class ApplicationController {
         }
     }
 
+    // 审批申请（管理员功能）
     public void approveApplication() {
         int applicationId = InputUtil.getInt("请输入要审批的申请ID：");
 

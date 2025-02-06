@@ -47,9 +47,8 @@ public class ApplicationService {
         applicationDao.updateApplicationStatus(classroomId, userId, ApplicationStatus.REJECTED);
     }
 
-    // 同意申请
+    // 获取教室的申请
     public List<Application> getApplicationsByClassroom(int classroomId) {
         return applicationDao.getApplicationsByClassroom(classroomId);
     }
-
 }

@@ -146,6 +146,7 @@ public class ApplicationDao {
         return 0;
     }
 
+    // 获取教室的申请记录
     public List<Application> getApplicationsByClassroom(int classroomId) {
         List<Application> applications = new ArrayList<>();
         String sql = "SELECT * FROM Applications WHERE classroom_id = ?";
@@ -173,5 +174,4 @@ public class ApplicationDao {
         }
         return applications;
     }
-
 }

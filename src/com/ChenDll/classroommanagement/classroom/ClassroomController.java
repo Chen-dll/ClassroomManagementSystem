@@ -171,5 +171,4 @@ public class ClassroomController {
                 .anyMatch(application -> application.getStatus() == ApplicationStatus.PENDING ||
                         application.getStatus() == ApplicationStatus.APPROVED);
     }
-
 }
