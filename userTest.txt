@@ -1,0 +1,20 @@
+(1, 'admin1', 'password123', 'ADMIN', NULL, NULL, NULL),
+(2, 'admin2', 'password456', 'ADMIN', NULL, NULL, NULL),
+(3, 'student1', 'password123', 'STUDENT', '3124001234', '计算机科学', '440112'),
+(4, 'student2', 'password456', 'STUDENT', '3124005678', '自动化', '440113'),
+(5, 'student3', 'password789', 'STUDENT', '3124009876', '土木工程', '440114'),
+(6, 'student4', 'password000', 'STUDENT', '3124006543', '生物学', '440115'),
+(7, 'student5', 'passwordabc', 'STUDENT', '3124004321', '化学工程', '440116');
+('admin3', 'password234', 'ADMIN', NULL, NULL, NULL);
+('admin4', 'password123', 'ADMIN', NULL, NULL, NULL),
+('admin5', 'password234', 'ADMIN', NULL, NULL, NULL);
+('student6', 'password111', 'STUDENT', '3124001357', '计算机科学', '440117'),
+('student7', 'password222', 'STUDENT', '3124002468', '电子工程', '440118'),
+('student8', 'password333', 'STUDENT', '3124007890', '物理学', '440119'),
+('student9', 'password444', 'STUDENT', '3124009081', '化学工程', '440120'),
+('student10', 'password555', 'STUDENT', '3124005678', '土木工程', '440121'),
+('student11', 'password666', 'STUDENT', '3124002345', '生物学', '440122'),
+('student12', 'password777', 'STUDENT', '3124008765', '环境科学', '440123'),
+('student13', 'password888', 'STUDENT', '3124002341', '医学', '440124'),
+('student14', 'password999', 'STUDENT', '3124002340', '农业科学', '440125'),
+('student15', 'password000', 'STUDENT', '3124006542', '语言学', '440126');
