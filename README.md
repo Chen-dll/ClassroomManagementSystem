@@ -1113,7 +1113,7 @@ public class ApplicationController {
 ```xml
 <configuration>
 
-    <!-- 设置 HikariCP 日志级别为 WARN -->
+    <!-- 设置 HikariCP 日志级别为 DEBUG -->
     <logger name="com.zaxxer.hikari" level="DEBUG"/>
 
     <!-- 控制台输出 -->
