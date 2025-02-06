@@ -1109,7 +1109,7 @@ public class ApplicationController {
 
 - `submitApplication` 方法引导学生输入申请信息，并调用 `applicationService` 检查课室的时间是否可用。通过 `applicationService.submitApplication` 提交申请并返回反馈。
 
-## 7.logback配置
+## 7. logback配置
 ```xml
 <configuration>
 
@@ -1154,7 +1154,7 @@ public class ApplicationController {
 - `logger` 元素用于设置特定包或类的日志级别，这里将 `com.zaxxer.hikari` 包的日志级别设置为 `DEBUG`。
 -  设置只输出到文件，不输出到控制台。
 
-## 8.数据库用户数据
+## 8. 数据库用户数据
 ```txt
 (1, 'admin1', 'password123', 'ADMIN', NULL, NULL, NULL),
 (2, 'admin2', 'password456', 'ADMIN', NULL, NULL, NULL),
