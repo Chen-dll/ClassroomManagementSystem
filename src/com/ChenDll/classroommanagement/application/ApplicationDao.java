@@ -20,22 +20,14 @@ public class ApplicationDao {
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                applications.add(new Application(
-                        rs.getInt("id"),
-                        rs.getInt("student_id"),
-                        rs.getInt("classroom_id"),
-                        rs.getString("reason"),
-                        ApplicationStatus.valueOf(rs.getString("status")),  // 使用 ApplicationStatus 枚举
-                        rs.getTimestamp("start_time") != null ? rs.getTimestamp("start_time").toLocalDateTime() : null,
-                        rs.getTimestamp("end_time") != null ? rs.getTimestamp("end_time").toLocalDateTime() : null,
-                        rs.getTimestamp("expire_time") != null ? rs.getTimestamp("expire_time").toLocalDateTime() : null
-                ));
+                applications.add(mapRowToApplication(rs));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return applications;
     }
+
 
     // 获取单个申请 by ID
     public Application getApplicationById(int applicationId) {
@@ -46,22 +38,14 @@ public class ApplicationDao {
             ps.setInt(1, applicationId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return new Application(
-                        rs.getInt("id"),
-                        rs.getInt("student_id"),
-                        rs.getInt("classroom_id"),
-                        rs.getString("reason"),
-                        ApplicationStatus.valueOf(rs.getString("status")),  // 使用 ApplicationStatus 枚举
-                        rs.getTimestamp("start_time") != null ? rs.getTimestamp("start_time").toLocalDateTime() : null,
-                        rs.getTimestamp("end_time") != null ? rs.getTimestamp("end_time").toLocalDateTime() : null,
-                        rs.getTimestamp("expire_time") != null ? rs.getTimestamp("expire_time").toLocalDateTime() : null
-                );
+                return mapRowToApplication(rs);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
+
 
     // 更新申请状态
     public void updateApplicationStatus(int applicationId, ApplicationStatus status) {
@@ -158,20 +142,26 @@ public class ApplicationDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                applications.add(new Application(
-                        rs.getInt("id"),
-                        rs.getInt("student_id"),
-                        rs.getInt("classroom_id"),
-                        rs.getString("reason"),
-                        ApplicationStatus.valueOf(rs.getString("status")),  // 使用 ApplicationStatus 枚举
-                        rs.getTimestamp("start_time") != null ? rs.getTimestamp("start_time").toLocalDateTime() : null,
-                        rs.getTimestamp("end_time") != null ? rs.getTimestamp("end_time").toLocalDateTime() : null,
-                        rs.getTimestamp("expire_time") != null ? rs.getTimestamp("expire_time").toLocalDateTime() : null
-                ));
+                applications.add(mapRowToApplication(rs));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return applications;
+    }
+
+
+    // 将 ResultSet 中的一行数据转换为 Application 对象
+    private Application mapRowToApplication(ResultSet rs) throws SQLException {
+        return new Application(
+                rs.getInt("id"),
+                rs.getInt("student_id"),
+                rs.getInt("classroom_id"),
+                rs.getString("reason"),
+                ApplicationStatus.valueOf(rs.getString("status")),  // 使用 ApplicationStatus 枚举
+                rs.getTimestamp("start_time") != null ? rs.getTimestamp("start_time").toLocalDateTime() : null,
+                rs.getTimestamp("end_time") != null ? rs.getTimestamp("end_time").toLocalDateTime() : null,
+                rs.getTimestamp("expire_time") != null ? rs.getTimestamp("expire_time").toLocalDateTime() : null
+        );
     }
 }
