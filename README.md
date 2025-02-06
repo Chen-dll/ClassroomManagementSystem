@@ -326,6 +326,7 @@ public class ClassroomDao {
         // 从数据库中删除课室信息
     }
 }
+```
 
 ### **3. 申请管理模块 (`application` 模块)**
 
