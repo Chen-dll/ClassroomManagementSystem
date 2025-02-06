@@ -2,11 +2,10 @@ package com.ChenDll.classroommanagement.classroom;
 
 import com.ChenDll.classroommanagement.application.ApplicationService;
 import com.ChenDll.classroommanagement.constants.ApplicationStatus;
+import com.ChenDll.classroommanagement.util.DateUtil;
 import com.ChenDll.classroommanagement.util.InputUtil;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class ClassroomController {
     private final ClassroomService classroomService = new ClassroomService();
@@ -42,75 +41,40 @@ public class ClassroomController {
         }
     }
 
-    // 统计课室使用情况
+    // 查看课室使用率（管理员权限）
     public void displayClassroomUsage() {
-        // 定义时间格式
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        // 获取并解析开始时间和结束时间
+        LocalDateTime[] times = DateUtil.parseStartAndEndTime();
 
-        LocalDateTime startTime = null;
-        LocalDateTime endTime = null;
-
-        // 获取并解析开始时间，直到格式正确
-        while (startTime == null) {
-            String startTimeStr = InputUtil.getString("请输入开始时间（格式：yyyy-MM-dd HH:mm）：");
-            try {
-                startTime = LocalDateTime.parse(startTimeStr, formatter);
-            } catch (DateTimeParseException e) {
-                System.out.println("❌ 开始时间格式无效，请确保格式为 yyyy-MM-dd HH:mm");
-            }
+        // 如果返回为 null，表示时间输入有误，直接返回
+        if (times == null) {
+            return;  // 如果结束时间早于开始时间，直接返回
         }
 
-        // 获取并解析结束时间，直到格式正确
-        while (endTime == null) {
-            String endTimeStr = InputUtil.getString("请输入结束时间（格式：yyyy-MM-dd HH:mm）：");
-            try {
-                endTime = LocalDateTime.parse(endTimeStr, formatter);
-            } catch (DateTimeParseException e) {
-                System.out.println("❌ 结束时间格式无效，请确保格式为 yyyy-MM-dd HH:mm");
-            }
-        }
-        // 检查结束时间是否早于开始时间
-        if (endTime.isBefore(startTime)) {
-            System.out.println("❌ 结束时间不能早于开始时间！");
-            return;  // 如果结束时间早于开始时间，直接返回，拒绝申请
-        }
+        // 获取开始时间和结束时间
+        LocalDateTime startTime = times[0];
+        LocalDateTime endTime = times[1];
+
+        // 计算课室的使用率
         double usageRate = classroomService.getClassroomUsageRate(startTime, endTime);
         System.out.println("课室使用率: " + usageRate + "%");
     }
 
-    // 修改课室的活动安排（管理员权限）
+    // 更新课室活动安排（管理员权限）
     public void updateClassroomSchedule() {
         int classroomId = InputUtil.getInt("请输入课室ID：");
-        // 定义时间格式
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-        LocalDateTime startTime = null;
-        LocalDateTime endTime = null;
+        // 获取并解析开始时间和结束时间
+        LocalDateTime[] times = DateUtil.parseStartAndEndTime();
 
-        // 获取并解析开始时间，直到格式正确
-        while (startTime == null) {
-            String startTimeStr = InputUtil.getString("请输入开始时间（格式：yyyy-MM-dd HH:mm）：");
-            try {
-                startTime = LocalDateTime.parse(startTimeStr, formatter);
-            } catch (DateTimeParseException e) {
-                System.out.println("❌ 开始时间格式无效，请确保格式为 yyyy-MM-dd HH:mm");
-            }
+        // 如果返回为 null，表示时间输入有误，直接返回
+        if (times == null) {
+            return;  // 如果结束时间早于开始时间，直接返回
         }
 
-        // 获取并解析结束时间，直到格式正确
-        while (endTime == null) {
-            String endTimeStr = InputUtil.getString("请输入结束时间（格式：yyyy-MM-dd HH:mm）：");
-            try {
-                endTime = LocalDateTime.parse(endTimeStr, formatter);
-            } catch (DateTimeParseException e) {
-                System.out.println("❌ 结束时间格式无效，请确保格式为 yyyy-MM-dd HH:mm");
-            }
-        }
-        // 检查结束时间是否早于开始时间
-        if (endTime.isBefore(startTime)) {
-            System.out.println("❌ 结束时间不能早于开始时间！");
-            return;  // 如果结束时间早于开始时间，直接返回，拒绝申请
-        }
+        // 获取开始时间和结束时间
+        LocalDateTime startTime = times[0];
+        LocalDateTime endTime = times[1];
 
         // 检查新的时间段是否有冲突
         boolean isAvailable = applicationService.isTimeAvailable(classroomId, startTime, endTime);

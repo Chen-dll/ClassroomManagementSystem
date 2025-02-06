@@ -1,8 +1,8 @@
 package com.ChenDll.classroommanagement.util;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.Duration;
 
 public class DateUtil {
 
@@ -51,5 +51,23 @@ public class DateUtil {
     // 判断当前时间是否在给定的时间之后
     public static boolean isAfterNow(LocalDateTime dateTime) {
         return LocalDateTime.now().isAfter(dateTime);
+    }
+
+    // 获取并解析开始时间和结束时间
+    public static LocalDateTime[] parseStartAndEndTime() {
+        // 获取并解析开始时间
+        LocalDateTime startTime = InputUtil.getDateTime("请输入开始时间（格式：yyyy-MM-dd HH:mm）：");
+
+        // 获取并解析结束时间
+        LocalDateTime endTime = InputUtil.getDateTime("请输入结束时间（格式：yyyy-MM-dd HH:mm）：");
+
+        // 检查结束时间是否早于开始时间
+        if (endTime.isBefore(startTime)) {
+            System.out.println("❌ 结束时间不能早于开始时间！");
+            return null;  // 如果结束时间早于开始时间，返回 null
+        }
+
+        // 返回开始时间和结束时间
+        return new LocalDateTime[] { startTime, endTime };
     }
 }
