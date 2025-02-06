@@ -150,7 +150,6 @@ public class ApplicationDao {
         return applications;
     }
 
-
     // 将 ResultSet 中的一行数据转换为 Application 对象
     private Application mapRowToApplication(ResultSet rs) throws SQLException {
         return new Application(
