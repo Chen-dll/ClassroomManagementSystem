@@ -1,7 +1,7 @@
 ---
 
-# 课室管理系统![](https://komarev.com/ghpvc/?username=Chen-dll)
-These programs are coded by Chen Sixiang.   
+# 课室管理系统 ![](https://komarev.com/ghpvc/?username=Chen-dll)
+The program is coded by Chen Sixiang.   
 完成时间 2025年2月6日 
 
 ## 项目概述
