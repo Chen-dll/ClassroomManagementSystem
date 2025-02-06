@@ -96,7 +96,7 @@ public class UserDao {
             return hexString.toString();
         } catch (Exception e) {
             e.printStackTrace();
-            return password; // 发生错误时返回原密码（不推荐）
+            return password; // 发生错误时返回原密码
         }
     }
 

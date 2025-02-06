@@ -64,10 +64,18 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", role=" + role +
-                '}';
+        return String.format(
+                "用户信息 {\n" +
+                        "  用户ID: %d,\n" +
+                        "  用户名: '%s',\n" +
+                        "  角色: %s,\n" +
+                        "  学号: '%s',\n" +
+                        "  院系: '%s',\n" +
+                        "  身份证号: '%s',\n" +
+                        "  登录失败次数: %d,\n" +
+                        "  锁定到期时间: %s\n" +
+                        "}",
+                id, username, role, studentId, department, idCard, failedAttempts, (lockUntil != null ? lockUntil.toString() : "无")
+        );
     }
 }
