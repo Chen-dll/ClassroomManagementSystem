@@ -886,6 +886,25 @@ CREATE TABLE `applications` (
 - `created_time`：申请创建时间，默认为当前时间。
 - `expire_time`：申请过期时间，默认为空，在程序里面计算后储存，三天后过期。
 
+### **5.2.4 定时事件**
+
+系统还包含一个定时事件，用于自动更新申请状态。当申请过期时，自动将其状态更新为“已过期”。
+```sql
+DELIMITER $$
+
+/*!50106 CREATE DEFINER=`root`@`localhost` EVENT `update_expired_applications` ON SCHEDULE EVERY 1 HOUR STARTS '2025-02-05 21:27:28' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE Applications
+    SET status = 'EXPIRED'
+    WHERE expire_time < NOW() AND status = 'PENDING' */$$
+DELIMITER ;
+
+```
+**分析**：
+- `update_expired_applications`：定时事件，每小时执行一次。
+- `expire_time`：申请过期时间，默认为空，在程序里面计算后储存，三天后过期。
+- `status`：申请状态，包括待审核、已批准、已拒绝、已过期等，默认为待审核。
+- `NOW()`：当前时间，用于判断申请是否过期。
+- `status = 'PENDING'`：只更新状态为“待审核”的申请。
+
 ## 6. 用户交互界面设计与逻辑处理
 
 用户交互界面是系统的一个重要部分，特别是在控制台应用程序中，用户与系统的交互主要通过菜单实现。系统根据用户的输入决定跳转到不同的功能模块。
@@ -1087,4 +1106,48 @@ public class ApplicationController {
 
 - `submitApplication` 方法引导学生输入申请信息，并调用 `applicationService` 检查课室的时间是否可用。通过 `applicationService.submitApplication` 提交申请并返回反馈。
 
+## 7.logback配置
+```xml
+<configuration>
+
+    <!-- 设置 HikariCP 日志级别为 WARN -->
+    <logger name="com.zaxxer.hikari" level="DEBUG"/>
+
+    <!-- 控制台输出 -->
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %-5level - %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 将日志输出到文件 -->
+    <appender name="File" class="ch.qos.logback.core.FileAppender">
+        <file>logs/application.log</file> <!-- 日志文件路径 -->
+<!--        &lt;!&ndash; 设置日志文件的滚动策略 &ndash;&gt;-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
+<!--            &lt;!&ndash; 当日志文件大小超过 10MB 时，进行轮转 &ndash;&gt;-->
+<!--            <maxFileSize>10MB</maxFileSize>-->
+<!--        </rollingPolicy>-->
+
+<!--        &lt;!&ndash; 设置日志文件的最大历史文件数 &ndash;&gt;-->
+<!--        <maxHistory>10</maxHistory>  &lt;!&ndash; 保留最近 10 个日志文件 &ndash;&gt;-->1
+        <!-- 设置日志文件的格式 -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %-5level - %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 设置根日志级别 -->
+    <root level="INFO">
+        <appender-ref ref="File"/>
+    </root>
+
+</configuration>
+```
+
+**分析**：
+
+- `logback.xml` 文件用于配置日志记录系统。
+- `logger` 元素用于设置特定包或类的日志级别，这里将 `com.zaxxer.hikari` 包的日志级别设置为 `DEBUG`。
+-  设置只输出到文件，不输出到控制台。
 ---
