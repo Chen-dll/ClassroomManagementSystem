@@ -1155,14 +1155,15 @@ public class ApplicationController {
 -  设置只输出到文件，不输出到控制台。
 
 ## 8. 数据库用户数据
+- 用于测试程序
 ```txt
-(1, 'admin1', 'password123', 'ADMIN', NULL, NULL, NULL),
-(2, 'admin2', 'password456', 'ADMIN', NULL, NULL, NULL),
-(3, 'student1', 'password123', 'STUDENT', '3124001234', '计算机科学', '440112'),
-(4, 'student2', 'password456', 'STUDENT', '3124005678', '自动化', '440113'),
-(5, 'student3', 'password789', 'STUDENT', '3124009876', '土木工程', '440114'),
-(6, 'student4', 'password000', 'STUDENT', '3124006543', '生物学', '440115'),
-(7, 'student5', 'passwordabc', 'STUDENT', '3124004321', '化学工程', '440116');
+('admin1', 'password123', 'ADMIN', NULL, NULL, NULL),
+('admin2', 'password456', 'ADMIN', NULL, NULL, NULL),
+('student1', 'password123', 'STUDENT', '3124001234', '计算机科学', '440112'),
+('student2', 'password456', 'STUDENT', '3124005678', '自动化', '440113'),
+('student3', 'password789', 'STUDENT', '3124009876', '土木工程', '440114'),
+('student4', 'password000', 'STUDENT', '3124006543', '生物学', '440115'),
+('student5', 'passwordabc', 'STUDENT', '3124004321', '化学工程', '440116');
 ('admin3', 'password234', 'ADMIN', NULL, NULL, NULL);
 ('admin4', 'password123', 'ADMIN', NULL, NULL, NULL),
 ('admin5', 'password234', 'ADMIN', NULL, NULL, NULL);
