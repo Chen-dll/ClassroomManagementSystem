@@ -1155,7 +1155,7 @@ public class ApplicationController {
 -  设置只输出到文件，不输出到控制台。
 
 ## 8. 数据库用户数据
-用于测试程序
+- 用于测试程序
 ```txt
 ('admin1', 'password123', 'ADMIN', NULL, NULL, NULL),
 ('admin2', 'password456', 'ADMIN', NULL, NULL, NULL),
